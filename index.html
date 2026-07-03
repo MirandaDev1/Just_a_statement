@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Um recado pra você...</title>
+    
+    <!-- Importando fonte premium e moderna -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <style>
+        /* Fundo com degradê animado premium */
         body {
             margin: 0;
             padding: 0;
@@ -12,24 +19,68 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #1a1a2e;
+            background: linear-gradient(135deg, #0f0c1b, #1a1a3a, #0b0914);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
             color: #ffffff;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             text-align: center;
             overflow: hidden;
         }
 
-        .container {
-            background-color: #16213e;
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 25px rgba(0,0,0,0.5);
-            max-width: 90%;
-            width: 350px;
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        h1 { color: #e94560; margin-bottom: 20px; }
-        p { font-size: 1.2rem; margin-bottom: 30px; color: #e6e6e6; }
+        /* Container estilo "Glassmorphism" com animação de flutuação */
+        .container {
+            background: rgba(22, 33, 62, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 45px 30px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 
+                        0 0 30px rgba(233, 69, 96, 0.1);
+            max-width: 85%;
+            width: 360px;
+            animation: floatContainer 4s ease-in-out infinite;
+        }
+
+        @keyframes floatContainer {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Título com degradê brilhante */
+        h1 {
+            font-weight: 800;
+            font-size: 2.4rem;
+            background: linear-gradient(45deg, #ff4e50, #f9d423);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 0;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        p {
+            font-size: 1.08rem;
+            line-height: 1.7;
+            margin-bottom: 35px;
+            color: #cbd5e1;
+            font-weight: 400;
+        }
+
+        strong {
+            color: #ffffff;
+            font-size: 1.25rem;
+            display: block;
+            margin-top: 20px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
 
         .botoes {
             display: flex;
@@ -40,24 +91,37 @@
         }
 
         button {
-            font-size: 1.2rem;
-            padding: 12px 35px;
+            font-size: 1.1rem;
+            padding: 14px 38px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease; 
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
+        /* Botão Sim com efeito Neon */
         #btn-sim {
-            background-color: #e94560;
+            background: linear-gradient(45deg, #e94560, #ff6b81);
             color: white;
+            box-shadow: 0 8px 20px rgba(233, 69, 96, 0.35);
         }
 
+        #btn-sim:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(233, 69, 96, 0.5);
+        }
+
+        #btn-sim:active {
+            transform: scale(0.98);
+        }
+
+        /* Botão Não mais discreto */
         #btn-nao {
-            background-color: #533483;
-            color: white;
-            position: relative; 
+            background: #252542;
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
         }
     </style>
 </head>
@@ -65,7 +129,7 @@
 
     <div class="container">
         <h1>Oi...</h1>
-        <p>Sempre valorizei muito a nossa amizade, mas seria mentira da minha parte não confessar que tenho uma quedinha por você. Você é linda. Fiz esse site só pra deixar isso claro sem passar (tanta) vergonha ao vivo.<br><br><strong>Você me compreende?</strong></p>
+        <p>Sempre valorizei muito a nossa amizade, mas seria mentira da minha parte não confessar que tenho uma quedinha por você. Você é linda. Fiz esse site só pra deixar isso claro sem passar (tanta) vergonha ao vivo.<br><strong>Você me compreende?</strong></p>
         
         <div class="botoes">
             <button id="btn-sim" onclick="enviarResposta('Sim, entendi! Achei fofo. 😊')">Sim!</button>
@@ -74,14 +138,12 @@
     </div>
 
     <script>
-        // Função que envia a mensagem para o Zap do seu amigo
         function enviarResposta(mensagem) {
             const numeroZap = "5521988992395"; 
             const url = `https://wa.me/${numeroZap}?text=${encodeURIComponent(mensagem)}`;
             window.location.href = url;
         }
 
-        // Função do botão fugir
         function fugir() {
             const btnNao = document.getElementById("btn-nao");
             const maxW = window.innerWidth - btnNao.offsetWidth - 20;
@@ -97,3 +159,4 @@
     </script>
 </body>
 </html>
+
