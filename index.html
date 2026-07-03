@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Um recado pra você...</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1a1a2e;
+            color: #ffffff;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: #16213e;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+            max-width: 90%;
+            width: 350px;
+        }
+
+        h1 { color: #e94560; margin-bottom: 20px; }
+        p { font-size: 1.2rem; margin-bottom: 30px; color: #e6e6e6; }
+
+        .botoes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            min-height: 60px;
+        }
+
+        button {
+            font-size: 1.2rem;
+            padding: 12px 35px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease; 
+        }
+
+        #btn-sim {
+            background-color: #e94560;
+            color: white;
+        }
+
+        #btn-nao {
+            background-color: #533483;
+            color: white;
+            position: relative; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Oi...</h1>
+        <p>Sempre valorizei muito a nossa amizade, mas seria mentira da minha parte não confessar que tenho uma quedinha por você. Você é linda. Fiz esse site só pra deixar isso claro sem passar (tanta) vergonha ao vivo.<br><br><strong>Você me compreende?</strong></p>
+        
+        <div class="botoes">
+            <button id="btn-sim" onclick="enviarResposta('Sim, entendi! Achei fofo. 😊')">Sim!</button>
+            <button id="btn-nao" onmouseover="fugir()" ontouchstart="fugir()" onclick="enviarResposta('Achei muito criativo, mas prefiro que a gente continue só na amizade mesmo! kkkk')">Não</button>
+        </div>
+    </div>
+
+    <script>
+        // Função que envia a mensagem para o Zap do seu amigo
+        function enviarResposta(mensagem) {
+            const numeroZap = "5521988992395"; 
+            const url = `https://wa.me/${numeroZap}?text=${encodeURIComponent(mensagem)}`;
+            window.location.href = url;
+        }
+
+        // Função do botão fugir
+        function fugir() {
+            const btnNao = document.getElementById("btn-nao");
+            const maxW = window.innerWidth - btnNao.offsetWidth - 20;
+            const maxH = window.innerHeight - btnNao.offsetHeight - 20;
+            
+            const randomX = Math.floor(Math.random() * maxW);
+            const randomY = Math.floor(Math.random() * maxH);
+            
+            btnNao.style.position = "fixed";
+            btnNao.style.left = randomX + "px";
+            btnNao.style.top = randomY + "px";
+        }
+    </script>
+</body>
+</html>
